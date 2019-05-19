@@ -17,4 +17,4 @@ TODO:
 
 ---
 
-Noe: This is a fairly naive package that makes many assumptions that probably won't hold true outside of my use case.
+Note: This is a fairly naive package that makes many assumptions that probably won't hold true outside of my use case.
