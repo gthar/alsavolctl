@@ -4,7 +4,7 @@ Python package to monitor and control ALSA volume on my media player RaspberryPi
 ## Installation
 * Make sure the user that will run this exists: `useradd -M -G audio -s /usr/sbin/nologin volume`
 * Make sure the expected virtual environment exists with Python3.7: `/usr/local/opt/virtualenvs/volume_ctl`
-* cp vol_webui.service /etc/systemd/system`
+* `cp vol_webui.service /etc/systemd/system`
 * `systemctl start vol_webui.service`
 * `systemctl enable vol_webui.service`
 
