@@ -8,10 +8,10 @@ Python package to monitor and control ALSA volume on my media player RaspberryPi
 * `systemctl start vol_webui.service`
 * `systemctl enable vol_webui.service`
 
-##Implemented so far:
+## Implemented so far:
 * vol_webui. Intented for use with https://github.com/gthar/vol_webui. The script should communicate via WebSockets to that static website.
 
-##TODO:
+## TODO:
 * Hardware volume view (probably with a 7-segment display)
 * Hardware volume control (probably with a digital knob)
 
