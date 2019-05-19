@@ -332,7 +332,7 @@ Mixer_init(Mixer *self, PyObject *args, PyObject *kwds)
 
 static PyTypeObject MixerType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    .tp_name = "_alsavolctl.Mixer",
+    .tp_name = "_mixer.Mixer",
     .tp_doc = "my mixer object",
     .tp_basicsize = sizeof(Mixer),
     .tp_itemsize = 0,
@@ -343,20 +343,20 @@ static PyTypeObject MixerType = {
     .tp_methods = Mixer_methods
 };
 
-static struct PyModuleDef _alsavolctl_module = {
+static struct PyModuleDef _mixer_module = {
     PyModuleDef_HEAD_INIT,
-    .m_name = "_alsavolctl",
+    .m_name = "_mixer",
     .m_doc = "My C module to monitor an control ALSA volume",
     .m_size = -1,
 };
 
-PyObject *PyInit__alsavolctl(void)
+PyObject *PyInit__mixer(void)
 {
     PyObject *m;
     if (PyType_Ready(&MixerType) < 0)
         return NULL;
 
-    m = PyModule_Create(&_alsavolctl_module);
+    m = PyModule_Create(&_mixer_module);
     if (m == NULL)
         return NULL;
 

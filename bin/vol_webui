@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+"""
+Server part of the vol_webui. Communicate with the client through WebSockets
+"""
+
+import argparse
+import sys
+
+from alsavolctl.vol_webui import main
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Volume Web UI")
+    parser.add_argument("--host", type=str, default='localhost')
+    parser.add_argument("--card", type=str, default='hw:0')
+    parser.add_argument("--device", type=str, default='default')
+    parser.add_argument("--mixer", type=str, default='Master')
+    parser.add_argument("--port", type=int, default=6789)
+    args = parser.parse_args()
+    sys.exit(main(args))

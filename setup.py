@@ -11,7 +11,12 @@ if __name__ == '__main__':
         author = 'Ricard Illa',
         author_email = 'r.illa.pujagut@gmail.com',
         url = 'https://github.com/gthar/alsavolctl',
-        py_modules = ['alsavolctl'],
+        packages=['alsavolctl'],
+        scripts = ["bin/vol_webui"],
+        py_modules = ['alsavolctl.mixer', 'alsavolctl.vol_webui'],
+        install_requires = [
+            'websockets'
+        ],
         ext_modules=[
-            Extension('_alsavolctl', ['mixer_class.c'], libraries=['asound'])]
+            Extension('alsavolctl._mixer', ['src/mixer.c'], libraries=['asound'])]
     )
