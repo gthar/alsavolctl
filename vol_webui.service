@@ -3,18 +3,16 @@ Description = daemon for the volume web ui
 After = systemd-user-sessions.service
 
 [Service]
-Environment = "VENV=/usr/local/opt/virtualenvs/volume_ctl"
-Environment = "HOST=0.0.0.0"
-Environment = "PORT=6789"
-Environment = "CARD=hw:0"
-Environment = "DEVICE=default"
-Environment = "MIXER=Digital"
 User = volume
 Group = volume
 Type = simple
-ExecStart = ${VENV}/bin/python ${VENV}/bin/vol_webui \
-                --host ${HOST} --port ${PORT} \
-                --card ${CARD} --device ${DEVICE} --mixer ${MIXER}
+ExecStart = /usr/local/opt/virtualenvs/volume_ctl/bin/python \
+                /usr/local/opt/virtualenvs/volume_ctl/bin/vol_webui \
+                    --host 0.0.0.0 \
+                    --port 6789 \
+                    --card hw:0 \
+                    --device default \
+                    --mixer master
 Restart = on-failure
 RestartSec = 15
 
