@@ -12,7 +12,7 @@ ExecStart = /usr/local/opt/virtualenvs/volume_ctl/bin/python \
                     --port 6789 \
                     --card hw:0 \
                     --device default \
-                    --mixer master
+                    --mixer Digital
 Restart = on-failure
 RestartSec = 15
 
