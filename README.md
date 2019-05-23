@@ -7,7 +7,8 @@ Python package to monitor and control ALSA volume on my media player RaspberryPi
 * Make sure the expected virtual environment exists with Python3.7:
     * `virtualenv -p $(which python3.7) /usr/local/opt/virtualenvs/volume_ctl`
 * `source /usr/local/opt/virtualenvs/volume_ctl/bin/activate`
-* `python setup.py install`
+* `python setup.py sdist`
+* `pip install dist alsavolctl-1.0.tar.gz`
 * `cp vol_webui.service /etc/systemd/system`
 * `systemctl start vol_webui.service`
 * `systemctl enable vol_webui.service`
