@@ -4,6 +4,7 @@
 Server part of the vol_webui. Communicate with the client through WebSockets
 """
 
+import argparse
 import asyncio
 import functools
 import json
@@ -81,12 +82,15 @@ async def handler(websocket, _, connected, mixer_ctl):
         connected.remove(websocket)
 
 
-def main(args):
+def start_server(mixer_info, address):
     """
-    Do the thing
+    Start the WebSockets server
     """
     connected = set()
-    mixer_ctl = Mixer(args.card, args.device, args.mixer)
+    mixer_ctl = Mixer(
+        mixer_info['card'],
+        mixer_info['device'],
+        mixer_info['mixer'])
 
     loop = asyncio.get_event_loop()
     loop.create_task(producer(mixer_ctl, connected))
@@ -95,7 +99,25 @@ def main(args):
             handler,
             connected=connected,
             mixer_ctl=mixer_ctl),
-        args.host,
-        args.port
-    ))
+        address['host'],
+        address['port']))
     loop.run_forever()
+
+
+def main():
+    """
+    Parse the arguments and to the thing
+    """
+    parser = argparse.ArgumentParser(description="Volume Web UI")
+    parser.add_argument("--host", type=str, default='localhost')
+    parser.add_argument("--card", type=str, default='hw:0')
+    parser.add_argument("--device", type=str, default='default')
+    parser.add_argument("--mixer", type=str, default='Master')
+    parser.add_argument("--port", type=int, default=6789)
+    args = parser.parse_args()
+    mixer_info = {
+        'card': args.card,
+        'device': args.device,
+        'mixer': args.mixer}
+    address = {'host': args.host, 'port': args.port}
+    start_server(mixer_info, address)
