@@ -2,13 +2,25 @@
 
 """
 Server part of the vol_webui. Communicate with the client through WebSockets
+
+Usage:
+    vol_webui [options]
+    vol_webui -h | --help
+
+Options:
+    -h --help          Show this screen
+    --host <host>      Server host [default: localhost]
+    --port <port>      Server port [default: 6789]
+    --card <card>      Physical card [default: hw:0]
+    --device <device>  Sound device [default: default]
+    --mixer <mixer>    Mixer [default: Master]
 """
 
-import argparse
 import asyncio
 import functools
 import json
 
+import docopt
 import websockets
 
 from alsavolctl.mixer import Mixer
@@ -108,16 +120,13 @@ def main():
     """
     Parse the arguments and to the thing
     """
-    parser = argparse.ArgumentParser(description="Volume Web UI")
-    parser.add_argument("--host", type=str, default='localhost')
-    parser.add_argument("--card", type=str, default='hw:0')
-    parser.add_argument("--device", type=str, default='default')
-    parser.add_argument("--mixer", type=str, default='Master')
-    parser.add_argument("--port", type=int, default=6789)
-    args = parser.parse_args()
+
+    args = docopt.docopt(__doc__)
+
     mixer_info = {
-        'card': args.card,
-        'device': args.device,
-        'mixer': args.mixer}
-    address = {'host': args.host, 'port': args.port}
+        'card': args['--card'],
+        'device': args['--device'],
+        'mixer': args['--mixer']}
+    address = {'host': args['--host'], 'port': int(args['--port'])}
+
     start_server(mixer_info, address)

@@ -15,7 +15,7 @@ if __name__ == '__main__':
         entry_points={
             'console_scripts': ["vol_webui=alsavolctl.vol_webui:main"]},
         py_modules=['alsavolctl.mixer', 'alsavolctl.vol_webui'],
-        install_requires=['websockets'],
+        install_requires=['docopt', 'websockets'],
         ext_modules=[Extension(
             'alsavolctl._mixer',
             ['src/mixer.c'],
